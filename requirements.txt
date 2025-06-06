@@ -1,0 +1,8 @@
+# Core runtime dependencies
+psutil>=5.8.0
+
+# Build dependencies (optional, only needed for creating exe)
+pyinstaller>=5.0.0
+
+# Note: tkinter is included with Python standard library
+# No additional GUI dependencies required
