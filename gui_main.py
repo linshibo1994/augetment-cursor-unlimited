@@ -876,8 +876,10 @@ class AugmentCleanerGUI:
                             clean_databases=True  # 同时处理数据库文件
                         )
                         if result['success']:
-                            files_count = len(result['files_processed'])
-                            db_count = len(result.get('databases_processed', []))
+                            files_processed = result.get('files_processed', [])
+                            files_count = len(files_processed) if isinstance(files_processed, list) else files_processed
+                            databases_processed = result.get('databases_processed', [])
+                            db_count = len(databases_processed) if isinstance(databases_processed, list) else databases_processed
                             db_records = result.get('database_records_cleaned', 0)
 
                             self.log(f"✅ {software_list_str} 反制成功")
@@ -912,7 +914,8 @@ class AugmentCleanerGUI:
                             clean_cache=False         # 设备ID反制不清理缓存
                         )
                         if result['success']:
-                            self.log(f"✅ VSCode/Cursor 设备ID处理成功，修改了 {len(result['directories_processed'])} 个目录")
+                            directories_count = result.get('directories_processed', 0)
+                            self.log(f"✅ VSCode/Cursor 设备ID处理成功，修改了 {directories_count} 个目录")
                             # 显示修改的文件详情
                             if result.get('files_processed'):
                                 self.log(f"   📄 修改了 {len(result['files_processed'])} 个文件:")
@@ -921,7 +924,8 @@ class AugmentCleanerGUI:
                                     self.log(f"      • {file_name}")
                             # 显示ID变更详情
                             if result.get('new_ids'):
-                                self.log(f"   🆔 生成了 {len(result['new_ids'])} 个新ID")
+                                new_ids_count = len(result['new_ids']) if isinstance(result['new_ids'], (list, dict)) else result['new_ids']
+                                self.log(f"   🆔 生成了 {new_ids_count} 个新ID")
                             overall_success = True
                         else:
                             self.log(f"❌ VSCode/Cursor 设备ID处理失败: {'; '.join(result['errors'])}")
@@ -2420,7 +2424,8 @@ class AugmentCleanerGUI:
                     clean_databases=True
                 )
                 if result['success']:
-                    files_count = len(result['files_processed'])
+                    files_processed = result.get('files_processed', [])
+                    files_count = len(files_processed) if isinstance(files_processed, list) else files_processed
                     self.log(f"      ✅ 处理了 {files_count} 个JetBrains ID文件")
                 else:
                     overall_success = False
