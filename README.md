@@ -9,6 +9,24 @@
 
 -----
 
+## 🆕 最新更新：Streamlit界面与多平台支持
+
+我们很高兴地宣布，AugmentCode Unlimited现在提供了三种使用方式，满足不同用户的需求：
+
+1. **Streamlit Web界面** - 全新现代化界面，支持数据可视化和响应式布局
+2. **命令行界面(CLI)** - 适合服务器环境和高级用户的轻量级选项
+3. **传统GUI界面** - 经典桌面应用体验
+
+### 🌟 Streamlit版本新特性
+
+- **现代化Web界面** - 美观、响应式的设计，适应各种屏幕尺寸
+- **实时数据可视化** - 使用Plotly图表直观展示扫描和清理结果
+- **增强的错误处理** - 更好的权限问题处理和错误恢复机制
+- **跨平台兼容性** - 在任何支持现代浏览器的系统上运行
+- **详细的状态反馈** - 实时日志和操作状态显示
+
+-----
+
 ### 🌟 为什么选择 AugmentCode Unlimited？
 
 在众多AugmentCode限制解决方案中，**AugmentCode Unlimited** 是唯一提供**完整四层精确清理**、**企业级安全备份**与**零配置一键使用**的终极工具。最重要的是，它**完全免费、无需注册**，致力于为每一位开发者提供最纯粹、最自由的AI编程体验。我们不仅解决问题，更关心您的数据安全和使用体验。
@@ -30,14 +48,15 @@
 | **价格与注册** | ✅ **完全免费，无需注册**           | ❓ 未知/可能收费 | ❓ 未知/需要注册 | ❓ 未知 |
 | **IDE支持范围** | ✅ **全部主流IDE**             | ⚠️ 仅JetBrains+VSCode | ⚠️ 仅VSCode | ❌ 仅Cursor |
 | **限制绕过能力** | ✅ **完整四层清理**              | ⚠️ 部分清理 | ⚠️ 基础清理 | ❌ 单层清理 |
-| **图形界面 (GUI)** | ✅ **专业GUI+实时状态**          | ❌ 仅命令行 | ❌ 仅命令行 | ✅ 基础GUI |
+| **图形界面 (GUI)** | ✅ **专业GUI+实时状态+Streamlit Web界面** | ❌ 仅命令行 | ❌ 仅命令行 | ✅ 基础GUI |
 | **智能检测与显示** | ✅ **显示具体清理项**             | ❌ 无详细信息 | ❌ 无详细信息 | ⚠️ 基础检测 |
 | **安全备份与恢复** | ✅ **智能备份+一键恢复**           | ⚠️ 基础备份 | ⚠️ 基础备份 | ❌ 无备份 |
 | **依赖管理** | ✅ **一键自动安装**              | ⚠️ 手动安装 | ⚠️ 手动安装 | ⚠️ 手动安装 |
 | **文件锁定保护** | ✅ **防重写保护**               | ✅ 支持 | ❌ 不支持 | ❌ 不支持 |
 | **进程自动管理** | ✅ **自动关闭IDE**             | ❌ 需手动关闭 | ❌ 需手动关闭 | ⚠️ 部分支持 |
-| **跨平台支持** | ⚠️ **Windows**              | ✅ 支持 | ⚠️ 主要Windows | ⚠️ 主要Windows |
+| **跨平台支持** | ✅ **Windows, macOS, Linux** | ✅ 支持 | ⚠️ 主要Windows | ⚠️ 主要Windows |
 | **语言与可维护性** | 🐍 **Python (易于维护扩展)**    | 🦀 Rust (编译型, 难维护) | 🐍 Python | 🐍 Python |
+| **数据可视化** | ✅ **Plotly图表展示结果**        | ❌ 不支持 | ❌ 不支持 | ❌ 不支持 |
 
 -----
 
@@ -54,7 +73,10 @@
 #### 🎨 卓越用户体验
 
 * **零配置启动**: 提供一键启动脚本，自动检查并安装所需依赖。
-* **专业GUI界面**: 实时显示检测到的IDE安装状态和具体待清理内容，操作过程一目了然。
+* **多种界面选择**: 
+  * **Streamlit Web界面**: 现代化、响应式设计，支持数据可视化
+  * **传统GUI界面**: 经典桌面应用体验
+  * **命令行界面**: 适合服务器环境和高级用户
 * **多种部署方式**: 支持Python源码直接运行，也支持打包为**完全免费、免安装、零依赖的独立exe文件**。
 * **详细日志记录**: 在 `logs/` 目录下生成完整的操作日志，便于问题排查。
 
@@ -81,66 +103,123 @@
 
 ### 📦 安装与使用
 
-#### 🚀 方法一：下载Release可执行文件 (推荐，最简单)
+#### 🚀 方法一：使用Streamlit版本 (推荐，最现代化)
 
-1.  前往本项目的 [可疑链接已删除] 页面。
-2.  下载最新版本的 `AugmentCode-Unlimited.exe`。
-3.  **完全免费，无需注册，解压即用**。
+1. **克隆项目**
+   ```bash
+   git clone https://github.com/linshibo1994/augetment-cursor-unlimited.git
+   cd augetment-cursor-unlimited
+   ```
 
-#### 🛠️ 方法二：从源码运行 (适合开发者)
+2. **运行启动脚本**
+   * Linux/macOS:
+     ```bash
+     chmod +x start_streamlit.sh
+     ./start_streamlit.sh
+     ```
+   * Windows:
+     ```
+     双击 start_streamlit.bat
+     ```
 
-1.  **克隆项目**
-    ```bash
-    git clone https://github.com/your-username/augment-unlimited.git
-    cd augment-unlimited
-    ```
-2.  **一键启动 (Windows)**
-    * 双击 `启动GUI.bat`。
-    * 脚本会自动为你创建虚拟环境、安装依赖并启动程序。
-3.  **手动运行 (所有平台)**
-    ```bash
-    # (可选，推荐) 创建并激活Python虚拟环境
-    python -m venv venv
-    source venv/bin/activate  # on Linux/macOS
-    venv\Scripts\activate     # on Windows
+3. **以管理员权限运行** (推荐，解决权限问题)
+   * Linux/macOS:
+     ```bash
+     sudo ./start_streamlit.sh
+     ```
+   * Windows:
+     ```
+     右键点击 start_streamlit.bat，选择"以管理员身份运行"
+     ```
 
-    # 安装依赖
-    pip install -r requirements.txt
+4. **访问Web界面**
+   * 启动脚本会自动打开浏览器，访问 http://localhost:8502
 
-    # 运行GUI
-    python src/gui.py
+#### 🛠️ 方法二：使用命令行版本 (适合服务器环境)
 
-    # 或运行命令行版本
-    python src/main.py --help
-    ```
+1. **运行命令行版本**
+   * Linux/macOS:
+     ```bash
+     chmod +x start_cli.sh
+     ./start_cli.sh
+     ```
+   * Windows:
+     ```
+     python cli_cleaner.py
+     ```
+
+2. **以管理员权限运行** (推荐，解决权限问题)
+   * Linux/macOS:
+     ```bash
+     sudo ./start_cli.sh
+     ```
+   * Windows:
+     ```
+     以管理员身份运行命令提示符，执行 python cli_cleaner.py
+     ```
+
+#### 🖥️ 方法三：使用传统GUI版本
+
+1. **运行传统GUI版本**
+   * Linux/macOS:
+     ```bash
+     chmod +x start_gui_fixed.sh
+     ./start_gui_fixed.sh
+     ```
+   * Windows:
+     ```
+     python gui_main_fixed.py
+     ```
+
+2. **以管理员权限运行** (推荐，解决权限问题)
+   * Linux/macOS:
+     ```bash
+     sudo ./start_gui_fixed.sh
+     ```
+   * Windows:
+     ```
+     以管理员身份运行命令提示符，执行 python gui_main_fixed.py
+     ```
 
 -----
 
 ### 🚀 使用指南
 
-#### 图形界面 (GUI) 操作
+#### Streamlit Web界面操作
 
-1.  **启动**: 直接运行 `.exe` 文件或 `start.bat` 脚本。
-2.  **检测**: 程序启动后会自动检测系统中的IDE和相关数据，并在界面上显示。
-3.  **清理**: 点击 **"🚀 开始清理"** 按钮，程序将自动完成所有操作。
-4.  **重启IDE**: 清理完成后，关闭本工具，重启你的IDE（如Cursor, VSCode），即可**使用新账户登录**。
-5.  **(可选)恢复**: 如果遇到问题，可点击“恢复备份”按钮，选择之前的备份进行一键恢复。
+1. **启动**: 运行 `start_streamlit.sh` 或 `start_streamlit.bat` 脚本。
+2. **扫描系统**: 点击 "🔍 扫描系统" 按钮，程序会自动检测系统中的IDE和相关数据。
+3. **选择清理选项**: 
+   * IDE选择: JetBrains IDEs, VSCode系列
+   * 清理选项: 清理数据库记录, 清理工作区存储
+   * 安全选项: 创建备份, 锁定文件
+4. **开始清理**: 点击 "🚀 开始清理" 按钮，程序将自动完成所有操作。
+5. **查看结果**: 清理完成后，可以在界面上查看清理结果和备份信息。
+6. **重启IDE**: 清理完成后，关闭本工具，重启你的IDE（如Cursor, VSCode），即可**使用新账户登录**。
 
-#### 命令行 (CLI) 操作（高级用户）
+#### 命令行 (CLI) 操作
 
 ```bash
-# 查看系统信息和待清理项
-python src/main.py --info
+# 扫描系统
+./start_cli.sh --scan
 
-# 只处理特定IDE
-python src/main.py --jetbrains-only  # 只处理JetBrains
-python src/main.py --vscode-only      # 只处理VSCode系列
+# 使用默认选项直接清理
+./start_cli.sh --clean
 
-# 高级选项
-python src/main.py --no-backup       # 跳过备份（更快但有风险）
-python src/main.py --verbose         # 输出更详细的日志
-python src/main.py --help            # 查看完整帮助
+# 显示帮助信息
+./start_cli.sh --help
+
+# 交互式运行（默认）
+./start_cli.sh
 ```
+
+#### 传统GUI界面操作
+
+1. **启动**: 运行 `start_gui_fixed.sh` 或 `gui_main_fixed.py`。
+2. **扫描系统**: 程序启动后会自动检测系统中的IDE和相关数据。
+3. **选择清理选项**: 在界面上选择要清理的IDE和清理选项。
+4. **开始清理**: 点击 "开始清理" 按钮，程序将自动完成所有操作。
+5. **重启IDE**: 清理完成后，关闭本工具，重启你的IDE，即可使用新账户登录。
 
 -----
 
@@ -165,7 +244,7 @@ AugmentCode通过以下四个层面实施设备限制，我们的工具针对每
 
 ### 🛡️ 安全特性
 
-* **自动备份与一键恢复**: 所有写操作前，自动在 `~/.augment_unlimiter_backups/` 目录下创建带时间戳的备份。支持在GUI中一键恢复到任意历史备份点。
+* **自动备份与一键恢复**: 所有写操作前，自动在 `~/.augment_cleaner_backups/` 目录下创建带时间戳的备份。支持在GUI中一键恢复到任意历史备份点。
 * **权限管理与文件锁定**: 自动处理文件只读等权限问题，并可在清理后锁定关键ID文件，防止IDE自动还原。
 * **原子操作与回滚**: 清理过程被设计为原子操作，若中途出现严重错误，会尝试自动回滚已做的修改，确保数据一致性。
 
@@ -173,9 +252,34 @@ AugmentCode通过以下四个层面实施设备限制，我们的工具针对每
 
 ### 🔧 故障排除
 
-* **权限错误**: 在Windows上，请尝试右键点击 `.exe` 或 `.bat` 文件，选择“以管理员身份运行”。
-* **未检测到IDE**: 请确保你的IDE是标准路径安装。可以运行 `python src/main.py --info` 查看工具的检测路径。
-* **清理失败**: 请确保在执行清理前已完全关闭所有相关的IDE进程。查看 `logs/` 目录下的日志文件获取详细错误信息。
+#### 权限问题
+
+* **macOS/Linux权限错误**: 
+  * 尝试使用 `sudo` 运行启动脚本: `sudo ./start_streamlit.sh`
+  * 或修复目录权限:
+    ```bash
+    # 修复JetBrains目录权限
+    sudo chmod -R 755 ~/Library/Application\ Support/JetBrains
+    sudo chown -R $(whoami) ~/Library/Application\ Support/JetBrains
+
+    # 修复VSCode目录权限
+    sudo chmod -R 755 ~/Library/Application\ Support/Code
+    sudo chown -R $(whoami) ~/Library/Application\ Support/Code
+
+    # 修复Cursor目录权限
+    sudo chmod -R 755 ~/Library/Application\ Support/Cursor
+    sudo chown -R $(whoami) ~/Library/Application\ Support/Cursor
+    ```
+
+* **Windows权限错误**: 
+  * 右键点击启动脚本，选择"以管理员身份运行"
+  * 或以管理员身份运行命令提示符，然后执行脚本
+
+#### 其他常见问题
+
+* **未检测到IDE**: 请确保你的IDE是标准路径安装。可以运行 `./start_cli.sh --scan` 查看工具的检测路径。
+* **清理失败**: 请确保在执行清理前已完全关闭所有相关的IDE进程。查看日志获取详细错误信息。
+* **Streamlit界面空白**: 尝试刷新浏览器，或检查终端输出是否有错误信息。
 
 -----
 
@@ -183,22 +287,10 @@ AugmentCode通过以下四个层面实施设备限制，我们的工具针对每
 
 欢迎通过提交 **Issue** 报告问题或提出建议，也欢迎通过 **Pull Request** 直接参与项目改进！
 
-
-
 ### 🌟 Star History
 
 如果这个项目对你有帮助，请给个⭐支持一下！你的Star是我们持续改进的最大动力！
 
-https://github.com/wozhenbang2004/augetment-cursor-unlimited.git
+https://github.com/linshibo1994/augetment-cursor-unlimited.git
 
 -----
-
-\<div align="center"\>
-
-**⭐ 如果觉得有用，请给个Star支持一下！这是一个完全免费的开源工具！ ⭐**
-
-**🔥 让更多开发者受益，一起打造最强的AugmentCode解决方案！ 🔥**
-
-Made with ❤️ by [Kayokoi](https://github.com/wozhenbang2004)
-
-\</div\>
