@@ -170,15 +170,24 @@ class JetBrainsHandler:
                     logger.info(f"Old ID: {old_id}")
                 except (OSError, UnicodeDecodeError) as e:
                     logger.warning(f"Could not read old ID from {file_path}: {e}")
+                except PermissionError:
+                    logger.warning(f"权限不足，无法读取文件: {file_path}")
+                    logger.warning(f"请尝试以管理员/sudo权限运行程序")
+                    result["error"] = f"Permission denied, cannot read file: {file_path}"
+                    return result
             
             # Create backup if requested and file exists
             if create_backups and file_path.exists():
-                backup_path = self.backup_manager.create_file_backup(file_path, f"jetbrains_{file_path.name}")
-                if backup_path:
-                    result["backup_path"] = str(backup_path)
-                    logger.info(f"Created backup: {backup_path}")
-                else:
-                    logger.warning(f"Failed to create backup for {file_path}")
+                try:
+                    backup_path = self.backup_manager.create_file_backup(file_path, f"jetbrains_{file_path.name}")
+                    if backup_path:
+                        result["backup_path"] = str(backup_path)
+                        logger.info(f"Created backup: {backup_path}")
+                    else:
+                        logger.warning(f"Failed to create backup for {file_path}")
+                except PermissionError:
+                    logger.warning(f"权限不足，无法创建备份: {file_path}")
+                    logger.warning(f"继续处理，但不创建备份")
             
             # Generate new ID
             new_id = self.id_generator.generate_uuid()
@@ -186,22 +195,40 @@ class JetBrainsHandler:
             logger.info(f"New ID: {new_id}")
             
             # Ensure parent directory exists
-            file_path.parent.mkdir(parents=True, exist_ok=True)
+            try:
+                file_path.parent.mkdir(parents=True, exist_ok=True)
+            except PermissionError:
+                logger.warning(f"权限不足，无法创建目录: {file_path.parent}")
+                logger.warning(f"请尝试以管理员/sudo权限运行程序")
+                result["error"] = f"Permission denied, cannot create directory: {file_path.parent}"
+                return result
             
             # Unlock file if it's locked
             if file_path.exists() and self.file_locker.is_file_locked(file_path):
-                self.file_locker.unlock_file(file_path)
+                try:
+                    self.file_locker.unlock_file(file_path)
+                except Exception as e:
+                    logger.warning(f"无法解锁文件，但将继续尝试写入: {e}")
             
             # Write new ID to file
-            file_path.write_text(new_id, encoding='utf-8')
-            logger.info(f"Successfully wrote new ID to {file_path}")
+            try:
+                file_path.write_text(new_id, encoding='utf-8')
+                logger.info(f"Successfully wrote new ID to {file_path}")
+            except PermissionError:
+                logger.error(f"权限不足，无法写入文件: {file_path}")
+                logger.warning(f"请尝试以管理员/sudo权限运行程序")
+                result["error"] = f"Permission denied, cannot write to file: {file_path}"
+                return result
             
             # Lock file if requested
             if lock_files:
-                if self.file_locker.lock_file(file_path):
-                    logger.info(f"Successfully locked file: {file_path}")
-                else:
-                    logger.warning(f"Failed to lock file: {file_path}")
+                try:
+                    if self.file_locker.lock_file(file_path):
+                        logger.info(f"Successfully locked file: {file_path}")
+                    else:
+                        logger.warning(f"Failed to lock file: {file_path}")
+                except Exception as e:
+                    logger.warning(f"无法锁定文件，但ID已成功修改: {e}")
             
             result["success"] = True
             

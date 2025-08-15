@@ -238,6 +238,8 @@ class FileLockManager:
             
             if result.returncode != 0:
                 logger.warning(f"macOS chflags unlock failed for {file_path}: {result.stderr}")
+                # 尝试使用sudo（仅用于日志记录，不实际执行）
+                logger.warning(f"可能需要管理员权限，请尝试: sudo chflags nouchg {file_path}")
             else:
                 logger.debug(f"macOS chflags unlock successful for: {file_path}")
                 
@@ -255,6 +257,8 @@ class FileLockManager:
             
             if result.returncode != 0:
                 logger.warning(f"macOS chmod unlock failed for {file_path}: {result.stderr}")
+                # 尝试使用sudo（仅用于日志记录，不实际执行）
+                logger.warning(f"可能需要管理员权限，请尝试: sudo chmod 644 {file_path}")
                 success = False
             else:
                 logger.debug(f"macOS chmod unlock successful for: {file_path}")
@@ -262,6 +266,19 @@ class FileLockManager:
         except (subprocess.TimeoutExpired, subprocess.SubprocessError, FileNotFoundError) as e:
             logger.warning(f"macOS chmod unlock command failed for {file_path}: {e}")
             success = False
+        
+        # 如果上述方法都失败，尝试使用Python的内置方法
+        if not success:
+            try:
+                # 尝试使用Python的os模块修改权限
+                os.chmod(file_path, 0o644)
+                logger.info(f"使用Python内置方法成功解锁文件: {file_path}")
+                success = True
+            except PermissionError:
+                logger.warning(f"权限不足，无法修改文件: {file_path}")
+                logger.warning(f"请尝试以管理员/sudo权限运行程序")
+            except Exception as e:
+                logger.warning(f"Python内置解锁方法失败: {e}")
         
         return success
     
